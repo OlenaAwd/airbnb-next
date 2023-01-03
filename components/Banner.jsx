@@ -10,6 +10,7 @@ const Banner = () => {
         className=""
         objectFit="cover"
         layout="fill"
+        priority
       />
       <div className="absolute top-1/2 w-full text-center">
         <p className="text-red-700 text-md sm:text-lg font-bold bg-slate-50">

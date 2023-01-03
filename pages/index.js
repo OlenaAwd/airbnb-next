@@ -11,8 +11,6 @@ import Footer from "../components/Footer";
 // const inter = Inter({ subsets: ["latin"] });
 
 export default function Home({ exploreData, cardData }) {
-  let res = exploreData;
-  // console.log("res", res);
   return (
     <div className>
       <Head>
@@ -27,12 +25,12 @@ export default function Home({ exploreData, cardData }) {
         <section className="pt-6">
           <h2 className="text-4xl font-semibold pb-5">Explore Nearby</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {exploreData?.map((item, index) => (
+            {exploreData?.map(({ img, distance, location }) => (
               <SmallCard
-                key={index}
-                image={item.img}
-                distance={item.distance}
-                location={item.location}
+                key={img}
+                image={img}
+                distance={distance}
+                location={location}
               />
             ))}
           </div>
@@ -58,20 +56,18 @@ export default function Home({ exploreData, cardData }) {
 }
 
 export async function getStaticProps() {
-  const exploreData = await fetch(
-    // "https://jsonplaceholder.typicode.com/posts"
-    "https://www.jsonkeeper.com/b/4G1G"
-  ).then((res) => res.json());
+  const exploreData = await fetch("https://www.jsonkeeper.com/b/4G1G").then(
+    (res) => res.json()
+  );
 
-  const cardData = await fetch(
-    // "https://jsonplaceholder.typicode.com/posts"
-    "https://www.jsonkeeper.com/b/VHHT"
-  ).then((res) => res.json());
+  const cardData = await fetch("https://www.jsonkeeper.com/b/VHHT").then(
+    (res) => res.json()
+  );
 
   return {
     props: {
       exploreData,
       cardData,
-    }, // will be passed to the page component as props
+    },
   };
 }
